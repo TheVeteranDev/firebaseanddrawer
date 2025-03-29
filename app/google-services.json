@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "482547653310",
+    "project_id": "psu-firebase",
+    "storage_bucket": "psu-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482547653310:android:31232c4ef5b95b79d05cef",
+        "android_client_info": {
+          "package_name": "com.example.firebaseanddrawer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfcmShjGA_t9i-aEg9vqtGxZEk3BLrfcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

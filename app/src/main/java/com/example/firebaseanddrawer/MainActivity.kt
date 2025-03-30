@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // If there is no current user, send them to the login activity
         if (auth.currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -39,15 +40,11 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
-        }
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
 
         val navView: NavigationView = binding.navView
+
+        // I needed to gain access to the drawer header to set the email address of the user
         val headerView = navView.getHeaderView(0)
         headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
 
@@ -70,6 +67,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // When an options item is selected, we have a switch statement
+    // There is only one option, logout, so this is all it does
+    // Could of kept this to just auth.SignOut() but this was done
+    // to show anticipation of expansion on the menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_logout -> {

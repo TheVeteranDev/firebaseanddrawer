@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -45,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
 
         // I needed to gain access to the drawer header to set the email address of the user
+        // I'm sure theres a better way then get index 0
         val headerView = navView.getHeaderView(0)
         headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
 

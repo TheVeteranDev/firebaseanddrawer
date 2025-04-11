@@ -1,7 +1,10 @@
 package com.example.firebaseanddrawer
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -15,7 +18,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.firebaseanddrawer.databinding.ActivityMainBinding
 import com.example.firebaseanddrawer.ui.login.LoginActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import androidx.core.graphics.toColorInt
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +44,19 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        // Initialize the floating camera button
+        val cameraButton: FloatingActionButton = binding.root.findViewById(R.id.camera_button)
+
+        // Set the colors to PSU color theme
+        cameraButton.imageTintList = ColorStateList.valueOf(Color.WHITE)
+        cameraButton.backgroundTintList = ColorStateList.valueOf("#002050".toColorInt())
+
+        // Set the on click listener to open the camera
+        cameraButton.setOnClickListener {
+            val cameraIntent= Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivity(cameraIntent)
+        }
+
         setSupportActionBar(binding.appBarMain.toolbar)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -54,11 +74,17 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_players, R.id.nav_about
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Initialize the bottom navigation view
+        val bottomNavView: BottomNavigationView = binding.root.findViewById(R.id.bottomNavigationView)
+
+        // Set the bottom navigation view to use the same navController the drawer uses
+        NavigationUI.setupWithNavController(bottomNavView, navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
